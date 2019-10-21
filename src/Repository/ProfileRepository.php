@@ -19,6 +19,18 @@ class ProfileRepository extends ServiceEntityRepository
         parent::__construct($registry, Profile::class);
     }
 
+    /**
+     * @return Profile[]
+     */
+    public function getActiveProfiles()
+    {
+        return $this->createQueryBuilder('p')
+                    ->where('p.active = true')
+                    ->getQuery()
+                    ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Profile[] Returns an array of Profile objects
     //  */

@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Profile
 {
+    const BASE_PATH      = 'https://www.erepublik.com/en/main/citizen/profile/%s';
+    const JSON_BASE_PATH = 'https://www.erepublik.com/en/main/citizen-profile-json/%s';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -19,7 +22,7 @@ class Profile
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, unique=true)
      */
     private $identifiant;
 
