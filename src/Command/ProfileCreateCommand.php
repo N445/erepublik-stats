@@ -37,6 +37,7 @@ class ProfileCreateCommand extends Command
         $this
             ->setDescription('Créer un profile')
             ->addArgument('id', InputArgument::OPTIONAL, 'Identifiant')
+            ->addArgument('name', InputArgument::OPTIONAL, 'Nom')
         ;
     }
 
@@ -44,13 +45,18 @@ class ProfileCreateCommand extends Command
     {
         $io       = new SymfonyStyle($input, $output);
         $id       = $input->getArgument('id');
+        $name       = $input->getArgument('name');
         $helper   = $this->getHelper('question');
-        $question = new Question('Entrez un identifiant : ');
+        $questionId = new Question('Entrez un identifiant : ');
         while (!$id) {
-            $id = $helper->ask($input, $output, $question);
+            $id = $helper->ask($input, $output, $questionId);
+        }
+        $questionName = new Question('Entrez un nom : ');
+        while (!$name) {
+            $name = $helper->ask($input, $output, $questionName);
         }
 
-        $this->em->persist(new Profile($id));
+        $this->em->persist((new Profile($id))->setName($name));
         $this->em->flush();
 
         $io->success(sprintf('Le profile avec l\'idetifiant %s à été crée', $id));
