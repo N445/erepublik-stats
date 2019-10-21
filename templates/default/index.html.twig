@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Stats</h1>
+        <canvas id="stats" data-stats="{{ stats }}"  width="400" height="400"></div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="{{ asset('js/stats.js') }}"></script>
+{% endblock %}

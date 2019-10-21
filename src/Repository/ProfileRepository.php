@@ -31,6 +31,21 @@ class ProfileRepository extends ServiceEntityRepository
             ;
     }
 
+    /**
+     * @return Profile[]
+     */
+    public function getProfilesStats()
+    {
+        return $this->createQueryBuilder('p')
+                    ->addSelect('stats')
+                    ->where('p.active = true')
+                    ->leftJoin('p.stats', 'stats')
+                    ->orderBy('stats.date', 'ASC')
+                    ->getQuery()
+                    ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Profile[] Returns an array of Profile objects
     //  */

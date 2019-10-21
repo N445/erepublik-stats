@@ -19,6 +19,21 @@ class StatsRepository extends ServiceEntityRepository
         parent::__construct($registry, Stats::class);
     }
 
+    /**
+     * @return Stats[]
+     */
+    public function getStats()
+    {
+        return $this->createQueryBuilder('s')
+                    ->addSelect('p')
+                    ->leftJoin('s.profile', 'p')
+                    ->where('p.active = true')
+                    ->orderBy('s.date', 'ASC')
+                    ->getQuery()
+                    ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Stats[] Returns an array of Stats objects
     //  */
