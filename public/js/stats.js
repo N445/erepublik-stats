@@ -12,12 +12,6 @@ var chart = new Chart($('#stats'), {
     // Configuration options go here
     options: {
         scales: {
-            /*xAxes: [{
-                type: 'time',
-                time: {
-                    unit: 'day'
-                }
-            }]*/
             xAxes: [{
                 type: 'time',
                 time: {

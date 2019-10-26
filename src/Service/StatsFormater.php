@@ -35,32 +35,22 @@ class StatsFormater
     }
 
     /**
-     * @param Stats[] $stats
+     * @param Profile[] $profiles
      * @return array
      */
-    public function getFormatedProfiles(array $stats)
+    public function getFormatedProfiles(array $profiles)
     {
-        return json_encode(array_map(function (Profile $item) {
+        return json_encode(array_map(function (Profile $profile) {
             return [
-                'name'        => $item->getName(),
+                'name'        => $profile->getName(),
                 'data'        => array_map(function (Stats $stats) {
                     return [
-//                        'x' => $stats->getDate()->format('j n Y'),
                         'x' => $stats->getDate()->format('Y-n-j'),
                         'y' => $stats->getXp(),
                     ];
-                }, $item->getStats()->toArray()),
+                }, $profile->getStats()->toArray()),
+                'lineTension' => '0',
             ];
-        }, $stats));
-    }
-
-    private function getColor()
-    {
-        return [
-            '#1abc9c',
-            '#e74c3c',
-            '#9b59b6',
-            '#f1c40f',
-        ];
+        }, $profiles));
     }
 }

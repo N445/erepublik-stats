@@ -3,7 +3,11 @@
 {% block body %}
     <div class="container">
         <h1>Stats</h1>
-        <canvas id="stats" data-stats="{{ stats }}"  width="400" height="400"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <canvas id="stats" data-stats="{{ stats }}" height="300px"></canvas>
+            </div>
+        </div>
     </div>
 {% endblock %}
 

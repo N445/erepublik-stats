@@ -44,10 +44,10 @@ class DefaultController extends AbstractController
     public function index()
     {
 //        dump($this->statsRepository->getStats());
-        dump($this->statsFormater->getFormatedProfiles($this->profileRepository->getProfilesStats()));
+        dump($this->profileRepository->getProfilesStatsDateBetween());
         return $this->render('default/index.html.twig', [
 //            'stats' => $this->statsFormater->getFormatedStats($this->statsRepository->getStats()),
-'stats' => $this->statsFormater->getFormatedProfiles($this->profileRepository->getProfilesStats()),
+'stats' => $this->statsFormater->getFormatedProfiles($this->profileRepository->getProfilesStatsDateBetween()),
         ]);
     }
 }

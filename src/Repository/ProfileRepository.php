@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Profile;
+use DateInterval;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -41,6 +42,29 @@ class ProfileRepository extends ServiceEntityRepository
                     ->where('p.active = true')
                     ->leftJoin('p.stats', 'stats')
                     ->orderBy('stats.date', 'ASC')
+                    ->getQuery()
+                    ->getResult()
+            ;
+    }
+
+    /**
+     * @return Profile[]
+     * @throws \Exception
+     */
+    public function getProfilesStatsDateBetween()
+    {
+        $now    = new \DateTime("NOW");
+        $before = clone $now;
+        $before->sub(new DateInterval('P7D'));
+
+        return $this->createQueryBuilder('p')
+                    ->addSelect('stats')
+                    ->where('p.active = true')
+                    ->leftJoin('p.stats', 'stats')
+                    ->orderBy('stats.date', 'ASC')
+                    ->where('stats.date BETWEEN :before AND :now')
+                    ->setParameter('before', $before)
+                    ->setParameter('now', $now)
                     ->getQuery()
                     ->getResult()
             ;
